@@ -1,0 +1,100 @@
+﻿@model IEnumerable<EventManager.ViewModels.EventViewModel>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style type="text/css">
+    .colorcode{
+        color:maroon;
+        font-weight:bold;
+    }
+</style>
+<div class="jumbotron">
+    <h2>Please Book Your Events.</h2>
+    <p class="lead">We love the people who make great events happen. That’s why we are here. Please book your events below:</p>
+    <p><a href="#" class="btn btn-primary btn-sm">Read more &raquo;</a></p>
+</div>
+<div style="width: auto; background-color:#e3eee4; height:60px; border-width:1px; border-radius:5px;padding-top:15px; padding-right:50px;">
+    @using (Html.BeginForm("index", "Home", FormMethod.Post, new { @id = "frmAdd", @class = "col-xs-12" }))
+    {
+        <div class="input-group" style="float:right;">
+            <input type="text" name="searchItem" id="searchItem" class="form-control" placeholder="Search by name or desc">
+            <span class="input-group-btn" style="width:0;">
+                <button class="btn btn-default" type="submit">Go</button>
+            </span>
+        </div>
+    }
+    </div>
+<div class="panel-body" >
+    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="sample_1_wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <table aria-describedby="sample_1_info" role="grid" class="table table-striped table-bordered table-hover table-full-width dataTable no-footer" id="sample_1">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EventName)
+                            </th>                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.EventVenue)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EventType)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.EventDate)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.EventFee)
+                            </th>
+                            <th>
+                               User Action 
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(modelItem => item.EventName)
+                            </td>                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EventVenue)
+                            </td>
+                            <td>
+                                @if (item.EventType == "Leap" || item.EventType == "Recruiting Mission" || item.EventType == "Hackathon")
+                                {
+                                    <div style="color:red;"> @Html.DisplayFor(modelItem => item.EventType)</div>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.EventType)
+                                }
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EventDate)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EventFee)
+                            </td>
+                            <td>
+                                <a style="width:70px; height:25px; font-size:9px; font-weight:bold;" href="@Url.Action("Booking", "EventBooking", new { id = item.EventId })" class="btn btn-block btn-primary" data-placement="top" title="Click to Edit"><i class="fa fa-edit"></i>Booking</a>
+                                <a style="width:70px; height:25px; font-size:9px; font-weight:bold;" href="@Url.Action("EventDetails", "Event", new { id = item.EventId })" class="btn btn-block btn-success" data-placement="top" title="Click to read more"><i class="fa fa-edit"></i>More details</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

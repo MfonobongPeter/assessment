@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "dash-board";
+}
+
+
+<style type="text/css">
+    #wrapper {
+        margin-right: 200px;
+        margin-top: 60px;
+        box-shadow: 0 3px 6px 1px #ccc;
+        border-radius: 15px;
+    }
+
+    #content {
+        float: left;
+        width: 100%;
+        background-color: #CCF;
+    }
+
+    #sidebar {
+        float: right;
+        width: 180px;
+        margin-right: -200px;
+        background-color: #FFf;
+        text-align:left;
+    }
+
+    #cleared {
+        clear: both;
+    }
+</style>
+<h4 style="margin-top:80px;">Admin DashBoard</h4>
+<div id="wrapper">
+    <div id="content">Admin Welcome message</div>
+    <div id="sidebar"><a href="@Url.Action("CreateAdminUser", "Admin")" class="btn btn-block btn-warning">Create Admin Users</a></div>
+    <br /><br />
+    <div id="sidebar"><a href="@Url.Action("AddEvent", "Event")" class="btn btn-block btn-info">Create Event</a></div><br /><br />
+    <div id="sidebar"><a href="@Url.Action("AddEventType", "EventType")" class="btn btn-block btn-default">Create Event Type</a></div><br /><br />
+
+    <div id="sidebar"><a href="@Url.Action("ViewAdminUsers", "Admin")" class="btn btn-block btn-success">View Admin Users</a></div>
+    <br /><br />
+    <div id="sidebar"><a href="@Url.Action("EventList", "Event")" class="btn btn-block btn-primary">View Event</a></div><br /><br />
+    
+    <div id="cleared"></div>
+</div>

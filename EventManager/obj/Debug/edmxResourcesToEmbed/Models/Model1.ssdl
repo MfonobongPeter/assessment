@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EventManagerDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EventBooking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventId" Type="bigint" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="50" />
+    <Property Name="EventDesc" Type="varchar(max)" />
+    <Property Name="EventVenueId" Type="int" Nullable="false" />
+    <Property Name="EventType" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="EventDate" Type="date" />
+    <Property Name="EventTime" Type="varchar" MaxLength="10" />
+    <Property Name="EventFee" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="EventType">
+    <Key>
+      <PropertyRef Name="EventTypeId" />
+    </Key>
+    <Property Name="EventTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventTypeName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EventUsers">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserFirstName" Type="varchar" MaxLength="50" />
+    <Property Name="UserLastName" Type="varchar" MaxLength="50" />
+    <Property Name="UserAddress" Type="varchar" MaxLength="200" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="100" />
+    <Property Name="PasswordSalt" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="IsActivated" Type="bit" />
+    <Property Name="CreatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EventVenue">
+    <Key>
+      <PropertyRef Name="VenueId" />
+    </Key>
+    <Property Name="VenueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VenueName" Type="varchar" MaxLength="50" />
+    <Property Name="VenueAddress" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" />
+    <Property Name="RoleDesc" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_EventBooking_Events">
+    <End Role="Events" Type="Self.Events" Multiplicity="0..1" />
+    <End Role="EventBooking" Type="Self.EventBooking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Events">
+        <PropertyRef Name="EventId" />
+      </Principal>
+      <Dependent Role="EventBooking">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Events_EventVenue">
+    <End Role="EventVenue" Type="Self.EventVenue" Multiplicity="1" />
+    <End Role="Events" Type="Self.Events" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventVenue">
+        <PropertyRef Name="VenueId" />
+      </Principal>
+      <Dependent Role="Events">
+        <PropertyRef Name="EventVenueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventUsers_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="EventUsers" Type="Self.EventUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="EventUsers">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EventManagerDbModelStoreContainer">
+    <EntitySet Name="EventBooking" EntityType="Self.EventBooking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventType" EntityType="Self.EventType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventUsers" EntityType="Self.EventUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventVenue" EntityType="Self.EventVenue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_EventBooking_Events" Association="Self.FK_EventBooking_Events">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="EventBooking" EntitySet="EventBooking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Events_EventVenue" Association="Self.FK_Events_EventVenue">
+      <End Role="EventVenue" EntitySet="EventVenue" />
+      <End Role="Events" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventUsers_Roles" Association="Self.FK_EventUsers_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="EventUsers" EntitySet="EventUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
