@@ -183,20 +183,20 @@ namespace EventManager.Repositories
             bool getState = false;
             try
             {
-                var remove = (from d in db.Events.Where(x => x.EventId == id) select d).FirstOrDefault();
-                if (remove != null)
-                {
-                    db.Events.Remove(remove);
-                    await db.SaveChangesAsync();
-                    getState = true;
-                }
-
-                //using (EventManagerDbEntities Context = new EventManagerDbEntities())
+                //var remove = (from d in db.Events.Where(x => x.EventId == id) select d).FirstOrDefault();
+                //if (remove != null)
                 //{
-                //    Event eventDelete = new Event { EventId = id };
-                //    Context.Entry(eventDelete).State = EntityState.Deleted;
-                //    await Context.SaveChangesAsync();
+                //    db.Events.Remove(remove);
+                //    await db.SaveChangesAsync();
+                //    getState = true;
                 //}
+
+                using (EventManagerDbEntities Context = new EventManagerDbEntities())
+                {
+                    Event eventDelete = new Event { EventId = id };
+                    Context.Entry(eventDelete).State = EntityState.Deleted;
+                    await Context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {

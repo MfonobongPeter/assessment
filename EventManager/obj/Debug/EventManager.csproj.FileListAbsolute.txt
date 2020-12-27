@@ -211,7 +211,6 @@ C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\bin\Mic
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\obj\Debug\EventManager.csprojAssemblyReference.cache
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\obj\Debug\EventManager.csproj.CoreCompileInputs.cache
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\obj\Debug\EventManager.csproj.CopyComplete
 C:\Users\peter.mfonobongx.EKEDCOM\source\repos\EventManager\EventManager\obj\Debug\EventManager.dll

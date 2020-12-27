@@ -71,7 +71,6 @@ namespace EventManager.Controllers
             {
                 return Json(new { f = ex.Message });
             }
-
         }
 
         [Authorize(Roles = "Admin")]
